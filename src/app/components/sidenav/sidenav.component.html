@@ -1,0 +1,11 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav  mode="side" opened > <!-- opened --> <!-- closed -->
+    <mat-nav-list>
+        <mat-list-item *ngFor="let elemento of elementi">
+          <mat-icon class="material-icons color_green" aria-hidden="false" aria-label="Example home icon" fontIcon="{{elemento}}"></mat-icon>
+          <span style="color: orange;"> {{elemento}} </span>
+        </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+
