@@ -7,6 +7,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { StepperVerticalExample } from "./components/stepper/stepper.component";
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -22,7 +23,8 @@ import { StepperVerticalExample } from "./components/stepper/stepper.component";
         MatSidenavModule,
         BrowserAnimationsModule,
         SidenavComponent,
-        StepperVerticalExample
+        StepperVerticalExample,
+        HttpClientModule,
     ]
 })
 export class AppModule { }

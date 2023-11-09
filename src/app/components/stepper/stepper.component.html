@@ -1,6 +1,6 @@
 <mat-stepper orientation="vertical" linear='true' #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" (ngSubmit)="form1()" #formone="ngForm">
+    <form [formGroup]="firstFormGroup" #formone="ngForm" >
       <ng-template matStepLabel>Fill out your name</ng-template>
       <mat-form-field>
         <mat-label>Name</mat-label>
@@ -12,11 +12,12 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup" (ngSubmit)="form2()" #formtwo="ngForm">
+    <form [formGroup]="secondFormGroup" #formtwo="ngForm" (ngSubmit)="onSubmitUser()">
       <ng-template matStepLabel>Fill out your address</ng-template>
       <mat-form-field>
         <mat-label>Address</mat-label>
         <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+        <mat-error *ngIf="secondFormGroup?.get('secondCtrl')?.hasError('notExists')">Il nome utente è già in uso</mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -25,7 +26,7 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup" (ngSubmit)="form3()" #formthree="ngForm">
+    <form [formGroup]="thirdFormGroup" #formthree="ngForm">
       <ng-template matStepLabel>Fill out your password</ng-template>
       <mat-form-field>
         <mat-label>Password</mat-label>
@@ -38,16 +39,17 @@
     </form>
   </mat-step>
   <mat-step>
+    <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button type="button" (click)="formone.ngSubmit.emit();formtwo.ngSubmit.emit();formthree.ngSubmit.emit()">
+      <button mat-button type="submit">
         submit
       </button>
-      <button type="submit" mat-button>manda</button>
     </div>
+  </form>
   </mat-step>
 </mat-stepper>
 
