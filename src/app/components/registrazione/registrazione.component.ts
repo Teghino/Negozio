@@ -12,14 +12,10 @@ import { RouterModule } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-
-/**
- * @title Stepper vertical
- */
 @Component({
-  selector: 'app-stepper',
-  templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.css'],
+  selector: 'app-registrazione',
+  templateUrl: './registrazione.component.html',
+  styleUrls: ['./registrazione.component.css'],
   standalone: true,
   imports: [
     MatButtonModule,
@@ -32,7 +28,7 @@ import { throwError } from 'rxjs';
     RouterModule
   ],
 })
-export class StepperVerticalExample{
+export class RegistrazioneComponent {
   @ViewChild('stepper') stepper?: MatStepper;
 
   constructor(private _formBuilder: FormBuilder, private http: HttpClient) {}
@@ -94,5 +90,4 @@ export class StepperVerticalExample{
       }
     });
   }
-
 }
