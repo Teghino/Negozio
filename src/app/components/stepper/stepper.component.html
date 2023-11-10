@@ -1,19 +1,7 @@
 <div class="container">
 <mat-stepper orientation="vertical" linear='true' #stepper class="step">
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" #formone="ngForm" >
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
   <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup" #formtwo="ngForm" (ngSubmit)="onSubmitUser()">
+    <form [formGroup]="secondFormGroup" #formtwo="ngForm">
       <ng-template matStepLabel>Fill out your email</ng-template>
       <mat-form-field>
         <mat-label>Email</mat-label>

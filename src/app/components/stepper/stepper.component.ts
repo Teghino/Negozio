@@ -55,7 +55,7 @@ export class StepperVerticalExample{
   });
 
   onSubmit() {
-    this.http.post('http://localhost:3000/api/register',{
+    this.http.post('http://localhost:3000/api/login',{
      'username' : this.mainForm.value.secondFormGroup?.secondCtrl,
      'password' : this.mainForm.value.thirdFormGroup?.thirdCtrl,
   }).pipe(
@@ -75,23 +75,6 @@ export class StepperVerticalExample{
     })
   ).subscribe((response) => {
       console.log(response);
-    });
-  }
-
-  onSubmitUser(){
-    console.log(this.mainForm.value.secondFormGroup?.secondCtrl);
-    this.http.get('http://localhost:3000/api/checkUser/' + this.mainForm.value.secondFormGroup?.secondCtrl
-    ).subscribe((response: any) => {
-      if(response.exists){
-        let secondFormGroup = this.mainForm.get('secondFormGroup');
-        let secondCtrl = secondFormGroup ? secondFormGroup.get('secondCtrl') : null;
-        if(secondCtrl){
-          secondCtrl.setErrors({notExists: true});
-          if (this.stepper) {
-            this.stepper.previous();
-          }
-        }
-      }
     });
   }
 
