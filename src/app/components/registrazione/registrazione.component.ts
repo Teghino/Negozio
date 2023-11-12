@@ -58,7 +58,7 @@ export class RegistrazioneComponent {
   }).pipe(
     catchError((error: any) => {
       console.error('Si è verificato un errore durante la registrazione:', error);
-      if(error.status == 400){
+      if(error.status == 409){
         let secondFormGroup = this.mainForm.get('secondFormGroup');
         let secondCtrl = secondFormGroup ? secondFormGroup.get('secondCtrl') : null;
         if(secondCtrl){

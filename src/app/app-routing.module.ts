@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StepperVerticalExample } from './components/stepper/stepper.component';
+import { StepperVerticalExample } from './components/login/stepper.component';
 import { RegistrazioneComponent } from './components/registrazione/registrazione.component';
 
 
