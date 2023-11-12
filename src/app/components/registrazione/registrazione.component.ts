@@ -45,13 +45,14 @@ export class RegistrazioneComponent {
   isLinear = false;
 
   mainForm = this._formBuilder.group({
-    fisrtFormGroup: this.firstFormGroup,
+    firstFormGroup: this.firstFormGroup,
     secondFormGroup: this.secondFormGroup,
     thirdFormGroup: this.thirdFormGroup
   });
 
   onSubmit() {
     this.http.post('http://localhost:3000/api/register',{
+     'nome' : this.mainForm.value.firstFormGroup?.firstCtrl,
      'username' : this.mainForm.value.secondFormGroup?.secondCtrl,
      'password' : this.mainForm.value.thirdFormGroup?.thirdCtrl,
   }).pipe(

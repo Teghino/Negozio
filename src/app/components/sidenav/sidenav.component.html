@@ -1,8 +1,9 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" closed> <!-- opened --> <!-- closed -->
     <mat-nav-list>
+      <mat-list-item disabled></mat-list-item>
         <mat-list-item *ngFor="let elemento of elementi; let i = index" routerLink="{{routeLinks[i]}}">
-          <mat-icon class="material-icons color_green" aria-hidden="false" aria-label="Example home icon" fontIcon="{{elemento}}"></mat-icon>
+          <mat-icon class="material-icons color_white" aria-hidden="false" aria-label="Example home icon" fontIcon="{{elemento}}"></mat-icon>
           <span> {{elemento}} </span>
         </mat-list-item>
     </mat-nav-list>
