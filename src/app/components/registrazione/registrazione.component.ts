@@ -91,8 +91,8 @@ export class RegistrazioneComponent {
       }
       return throwError(error);
     })
-  ).subscribe((response) => {
-      console.log(response);
+  ).subscribe((response : any) => {
+      console.log(response.token);
     });
   }
 
