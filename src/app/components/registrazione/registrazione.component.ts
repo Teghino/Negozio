@@ -12,6 +12,27 @@ import { RouterModule } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+export function passwordValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (!value) {
+      return null;
+    }
+
+    const hasUpperCase = /[A-Z]+/.test(value);
+
+    const hasNumber = /[0-9]+/.test(value);
+
+    const hasMinimumLength = value.length >= 6;
+
+    const passwordValid = hasUpperCase && hasNumber && hasMinimumLength;
+
+    return passwordValid ? null : { passwordInvalid: true };
+  };
+}
+
 @Component({
   selector: 'app-registrazione',
   templateUrl: './registrazione.component.html',
@@ -37,10 +58,10 @@ export class RegistrazioneComponent {
     firstCtrl: ['', Validators.required],
   });
   secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+    secondCtrl: ['', [Validators.required, Validators.email]],
   });
   thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],
+    thirdCtrl: ['', [Validators.required, passwordValidator()]],
   });
   isLinear = false;
 
@@ -76,7 +97,6 @@ export class RegistrazioneComponent {
   }
 
   onSubmitUser(){
-    console.log(this.mainForm.value.secondFormGroup?.secondCtrl);
     this.http.get('http://localhost:3000/api/checkUser/' + this.mainForm.value.secondFormGroup?.secondCtrl
     ).subscribe((response: any) => {
       if(response.exists){

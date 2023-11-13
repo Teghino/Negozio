@@ -3,6 +3,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenav} from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {MatSidenav} from '@angular/material/sidenav';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
 })
 export class ToolbarComponent {
   @Input() sidenav: MatSidenav | undefined;
@@ -18,5 +19,5 @@ export class ToolbarComponent {
   aprichiudi() {
     this.sidenav?.toggle();
   }
-  
+
 }

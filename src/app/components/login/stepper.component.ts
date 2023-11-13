@@ -61,20 +61,22 @@ export class StepperVerticalExample{
   }).pipe(
     catchError((error: any) => {
       console.error('Si è verificato un errore durante la registrazione:', error);
-      if(error.status == 400){
+      return throwError(error);
+    })
+  ).subscribe((response : any) => {
+      console.log(response.exists);
+      if(!response.exists){
         let secondFormGroup = this.mainForm.get('secondFormGroup');
         let secondCtrl = secondFormGroup ? secondFormGroup.get('secondCtrl') : null;
         if(secondCtrl){
           secondCtrl.setErrors({notExists: true});
           if (this.stepper) {
-            this.stepper.selectedIndex = 1; // Cambia l'indice come necessario
+            this.stepper.selectedIndex = 0; // Cambia l'indice come necessario
           }
         }
+      }else{
+
       }
-      return throwError(error);
-    })
-  ).subscribe((response) => {
-      console.log(response);
     });
   }
 
