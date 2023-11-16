@@ -13,6 +13,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 
+
 /**
  * @title Stepper vertical
  */
@@ -75,6 +76,7 @@ export class StepperVerticalExample{
           }
         }
       }else{
+        localStorage.setItem('access_token', response.access_token);
 
       }
     });

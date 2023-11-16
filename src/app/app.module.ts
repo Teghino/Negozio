@@ -10,7 +10,8 @@ import { StepperVerticalExample } from "./components/login/stepper.component";
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrazioneComponent } from './components/registrazione/registrazione.component';
 
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtService } from './servizi/jwt.service';
 
 
 
@@ -18,7 +19,9 @@ import { RegistrazioneComponent } from './components/registrazione/registrazione
     declarations: [
         AppComponent,
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtService, multi: true },
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
