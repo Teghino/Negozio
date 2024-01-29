@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" *ngIf="oggetti; else loading">
+        <div [routerLink]="['/oggetti/evidenziato', oggetto.id]" class="card" *ngFor="let oggetto of oggetti let i = index" (click)="send(oggetto.id)">
+            <img src="{{oggetto.foto}}" alt="lol">
+            <p id="nome">{{oggetto.nome}} </p>
+            <p> {{oggetto.prezzo}}$</p>
+        </div>
+        
+    </div>
+    <ng-template #loading>
+        <p>Caricamento in corso...</p>
+    </ng-template>
+</body>
+</html>

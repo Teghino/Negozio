@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="container">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="aprichiudi()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Street-wear</span>
+  <span class="medium">
+    <button mat-raised-button [matMenuTriggerFor]="menuUomo" class="item" color="primary"> Uomo </button>
+    <mat-menu #menuUomo="matMenu" class="my-menu">
+      <!-- Elementi del menu -->
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('felpa', 'u')"> felpe </button>
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('maglietta', 'u')"> magliette </button>
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('pantalone', 'u')"> pantaloni </button>
+    </mat-menu>
+    <button mat-raised-button class="item" color="primary"> Di tendenza </button>
+    <button mat-raised-button [matMenuTriggerFor]="menuDonna" class="item" color="primary"> Donna </button>
+    <mat-menu #menuDonna="matMenu" class="my-menu">
+      <!-- Elementi del menu -->
+      <button mat-menu-item routerLink="/oggetti"> felpe </button>
+      <button mat-menu-item routerLink="/oggetti"> magliette </button>
+      <button mat-menu-item routerLink="/oggetti"> pantaloni </button>
+    </mat-menu>
+  </span>
+  <span class="example-spacer"></span>
+  <div *ngIf="!isLogged">
+    <button mat-button routerLink="login"> Accedi </button>
+    <button mat-button routerLink=""> Registrati </button>
+  </div>
+  <div mat-button *ngIf="isLogged" class="user-info">
+    {{user.nameUser}} 
+    <div class="imgcontenitore">
+    <img *ngIf="imageUrl == null"  src="assets/img/noImmagine.jpg" alt="lol" class="profile-image">
+    <img *ngIf="imageUrl != null"  [src]="imageUrl" alt="lol" class="profile-image">
+    </div>
+
+  </div>
+</mat-toolbar>

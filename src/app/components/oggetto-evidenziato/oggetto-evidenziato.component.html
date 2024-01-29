@@ -1,0 +1,17 @@
+<div class="container">
+    <img src="{{oggetto.foto}}" alt="c">
+    <div class="contOgg">
+        <h1>{{oggetto.nome}}</h1>
+        <p>{{oggetto.descrizione}}</p>
+        <p>{{oggetto.prezzo}}$</p>
+        <div class="contTaglie">
+            <button *ngFor="let item of taglie" (click)="selezionaTaglia(item)" [ngClass]="{'selezionato': item === tagliaSelezionata, 'disabilitato': this['taglieDisponibili'] && this['taglieDisponibili'].includes(item)}" mat-stroked-button>{{item}}</button>
+        </div>
+        <div class="cart" (click)="addCart(oggetto)">
+            Aggiungi al carrello
+        </div>
+    </div>
+    
+
+</div>
+
