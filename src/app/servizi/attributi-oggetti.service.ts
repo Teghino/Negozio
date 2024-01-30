@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AttributiOggettiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private categoriaSubject = new BehaviorSubject<string | undefined>(undefined);
   private sessoSubject = new BehaviorSubject<string | undefined>(undefined);
   private oggettiSubject = new BehaviorSubject<{[key: string]: any}[]>([]);
-  private taglieDisponibili = new BehaviorSubject<{[key: string]: any}[]>([]);
+  private taglieDisponibili = new BehaviorSubject<string[]>([]);
 
   setTaglieDisponibili(id: string) {
     this.http.get(`http://localhost:3000/api/prodotto/${id}`, {withCredentials: true}).subscribe((data: any) => {
       const nomiTaglie = data.taglie.map((taglia: {nome: string}) => taglia.nome);
       this.taglieDisponibili.next(nomiTaglie)
+      this.router.navigate(['/oggetti/evidenziato', id]);
     });
   }
 

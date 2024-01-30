@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AttributiOggettiService } from '../../servizi/attributi-oggetti.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-oggetti',
@@ -13,7 +13,7 @@ export class OggettiComponent {
   tipo: string | undefined;
   sesso: string | undefined;
   oggetti: any;
-  constructor( private http: HttpClient, private attributiOggettiService: AttributiOggettiService) { }
+  constructor( private http: HttpClient, private attributiOggettiService: AttributiOggettiService, private router: Router) { }
 
   
 

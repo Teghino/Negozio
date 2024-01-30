@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container" *ngIf="oggetti; else loading">
-        <div [routerLink]="['/oggetti/evidenziato', oggetto.id]" class="card" *ngFor="let oggetto of oggetti let i = index" (click)="send(oggetto.id)">
+        <div class="card" *ngFor="let oggetto of oggetti let i = index" (click)="send(oggetto.id)">
             <img src="{{oggetto.foto}}" alt="lol">
             <p id="nome">{{oggetto.nome}} </p>
             <p> {{oggetto.prezzo}}$</p>
