@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from "../toolbar/toolbar.component";
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../servizi/localStorage.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -29,12 +29,13 @@ import { LocalStorageService } from '../../servizi/localStorage.service';
         MatIconModule,
         StepperVerticalExample,
         RouterModule,
-        ToolbarComponent
+        ToolbarComponent,
+        
     ]
 })
 export class SidenavComponent {
 
-  constructor(private router: Router, private localStorageService: LocalStorageService) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService, private cookie: CookieService) { }
 
   [x: string]: any;
   elementi = ['Home', 'Person', 'Settings'];
@@ -45,6 +46,6 @@ export class SidenavComponent {
   logOut() {
     this.localStorageService.removeItem('utente');
     this.router.navigate(['/login']);
-    document.cookie
+    this.cookie.deleteAll();
   }
 }

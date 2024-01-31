@@ -13,7 +13,7 @@
                 {{item}}
                 </button>
             </div>
-        <div class="cart" (click)="addCart(oggetto)">
+        <div class="cart" [ngClass]="{'disabled': !tagliaSelezionata}" (click)="addCart(oggetto)">
             Aggiungi al carrello
         </div>
     </div>

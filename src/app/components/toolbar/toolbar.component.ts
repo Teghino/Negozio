@@ -15,6 +15,8 @@ import { NgIf } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { AttributiOggettiService } from '../../servizi/attributi-oggetti.service';
 import { Router } from '@angular/router';
+import {MatBadgeModule} from '@angular/material/badge';
+import { CarrelloService } from 'src/app/servizi/carrello.service';
 
 interface RispostaApi {
   oggetti: [];
@@ -24,7 +26,7 @@ interface RispostaApi {
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule, CommonModule, NgIf, MatMenuModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule, CommonModule, NgIf, MatMenuModule, MatBadgeModule],
 })
 export class ToolbarComponent implements OnInit, OnDestroy{
   @Input() sidenav: MatSidenav | undefined;
@@ -33,8 +35,9 @@ export class ToolbarComponent implements OnInit, OnDestroy{
   user: Users;
   private storageSub!: Subscription;
   public imageUrl: any;
+  private numero: number = 0;
 
-  constructor(private http: HttpClient, private location: Location, private localStorageService: LocalStorageService, private sanitizer: DomSanitizer, private attributiOggettiService: AttributiOggettiService, private router: Router) {
+  constructor(private carrello: CarrelloService, private http: HttpClient, private location: Location, private localStorageService: LocalStorageService, private sanitizer: DomSanitizer, private attributiOggettiService: AttributiOggettiService, private router: Router) {
     const utente = JSON.parse(localStorage.getItem('utente') || '{}');
     this.user = new Users(utente.name, utente.isLogged);
     this.isLogged = this.user.getIsLoggedUser;
@@ -42,6 +45,9 @@ export class ToolbarComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.carrello.getCarrello().subscribe(carrello => {
+      this.numero = carrello.length;
+    });
     this.storageSub = this.localStorageService.watchStorage().subscribe(() => {
       this.updateUserFromLocalStorage();
     });
@@ -55,6 +61,10 @@ export class ToolbarComponent implements OnInit, OnDestroy{
       this.imageUrl = null;
     });
 
+  }
+
+  getNumero() { 
+    return this.numero;
   }
 
   ngOnDestroy(): void {

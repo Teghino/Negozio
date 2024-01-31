@@ -14,6 +14,7 @@ import { throwError } from 'rxjs';
 import { Users } from 'src/app/userModel';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../servizi/localStorage.service';
+import { CookieService } from 'ngx-cookie-service';
 
 /**
  * @title Stepper vertical
@@ -46,7 +47,7 @@ interface ApiResponse {
 export class StepperVerticalExample{
   @ViewChild('stepper') stepper?: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private cookie: CookieService, private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
 
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', [Validators.required, Validators.email]],
@@ -84,6 +85,8 @@ export class StepperVerticalExample{
       }else{
         let user = new Users(response.nome, true);
         this.localStorageService.setItem('utente', JSON.stringify(user));
+        this.cookie.set('accessToken', response.accessToken);
+        this.cookie.set('refreshToken', response.refreshToken);
         this.router.navigate(['/home'])
       }
     });

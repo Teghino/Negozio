@@ -25,7 +25,11 @@
     <button mat-button routerLink="login"> Accedi </button>
     <button mat-button routerLink=""> Registrati </button>
   </div>
+
   <div mat-button *ngIf="isLogged" class="user-info">
+    <div class="cartContainer">
+      <mat-icon [matBadge]='getNumero()' matBadgeColor="warn" class="cart" routerLink="/carrello" >shopping_cart</mat-icon>
+    </div>
     {{user.nameUser}} 
     <div class="imgcontenitore">
     <img *ngIf="imageUrl == null"  src="assets/img/noImmagine.jpg" alt="lol" class="profile-image">

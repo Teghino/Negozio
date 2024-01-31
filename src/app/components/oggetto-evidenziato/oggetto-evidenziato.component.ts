@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AttributiOggettiService } from '../../servizi/attributi-oggetti.service';
+import { CarrelloService } from 'src/app/servizi/carrello.service';
 
 @Component({
   selector: 'app-oggetto-evidenziato',
@@ -9,7 +10,7 @@ import { AttributiOggettiService } from '../../servizi/attributi-oggetti.service
 })
 export class OggettoEvidenziatoComponent implements OnInit{
 [x: string]: any;
-  constructor(private route: ActivatedRoute, private attributiOggettiService: AttributiOggettiService) { }
+  constructor(private route: ActivatedRoute, private attributiOggettiService: AttributiOggettiService, private carrello: CarrelloService) { }
 
   id: string = '';
   oggetto: any;
@@ -39,6 +40,8 @@ export class OggettoEvidenziatoComponent implements OnInit{
 
   addCart(oggetto: any) {
     console.log('aggiunto al carrello'+ ' ' + oggetto.nome);
+    oggetto.taglia = this.tagliaSelezionata;
+    this.carrello.setCarrello(oggetto, this.tagliaSelezionata);
   }
 
   selezionaTaglia(taglia: string) {

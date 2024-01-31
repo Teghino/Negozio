@@ -18,6 +18,7 @@ import { OggettiComponent } from './components/oggetti/oggetti.component';
 import { OggettoEvidenziatoComponent } from './components/oggetto-evidenziato/oggetto-evidenziato.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { CarrelloComponent } from './components/carrello/carrello.component';
 
 
 
@@ -28,6 +29,7 @@ import { MatRadioModule } from '@angular/material/radio';
         HomeComponent,
         OggettiComponent,
         OggettoEvidenziatoComponent,
+        CarrelloComponent,
     ],
     providers: [CookieService, LocalStorageService],
     bootstrap: [AppComponent],

@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PersonComponent } from './components/person/person.component';
 import { OggettiComponent } from './components/oggetti/oggetti.component';
 import { OggettoEvidenziatoComponent } from './components/oggetto-evidenziato/oggetto-evidenziato.component';
+import { CarrelloComponent } from './components/carrello/carrello.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'person', component: PersonComponent},
   {path: 'oggetti', component: OggettiComponent},
-  {path: 'oggetti/evidenziato/:id', component: OggettoEvidenziatoComponent}
+  {path: 'oggetti/evidenziato/:id', component: OggettoEvidenziatoComponent},
+  {path: 'carrello', component: CarrelloComponent}
 ];
 
 @NgModule({

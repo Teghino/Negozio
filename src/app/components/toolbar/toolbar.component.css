@@ -47,8 +47,31 @@ mat-toolbar{
 .user-info {
   display: flex;
   align-items: center;
-  width: 139px;
   justify-content: space-between;
+  gap: 10px;
+}
+
+.cartContainer{
+  position: relative;
+  margin-right: 10px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.cart{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cartContainer:hover .cart {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.cartContainer:hover{
+  background-color: rgb(88, 88, 255);
 }
 
 #imm{
