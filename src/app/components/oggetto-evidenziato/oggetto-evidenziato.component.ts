@@ -39,9 +39,9 @@ export class OggettoEvidenziatoComponent implements OnInit{
 
 
   addCart(oggetto: any) {
-    console.log('aggiunto al carrello'+ ' ' + oggetto.nome);
+    console.log('aggiunto al carrello'+ ' ' + oggetto);
     oggetto.taglia = this.tagliaSelezionata;
-    this.carrello.setCarrello(oggetto, this.tagliaSelezionata);
+    this.carrello.addCarrello(oggetto, this.tagliaSelezionata, this.id);
   }
 
   selezionaTaglia(taglia: string) {

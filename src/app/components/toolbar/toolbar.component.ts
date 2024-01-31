@@ -21,6 +21,36 @@ import { CarrelloService } from 'src/app/servizi/carrello.service';
 interface RispostaApi {
   oggetti: [];
 }
+
+interface Oggetto {
+  id: number;
+  nome: string;
+  prezzo: number;
+  sesso: string;
+  descrizione: string;
+  foto: string;
+}
+
+interface Taglia {
+  id: number;
+  nome: string;
+}
+
+interface CarrelloItem {
+  id: number;
+  emailUtente: string;
+  idOggetto: number;
+  idTaglia: number;
+  numero: number;
+  oggetti: Oggetto;
+  taglie: Taglia;
+}
+
+interface CarrelloResponse {
+  success: boolean;
+  message: string;
+  carrello: CarrelloItem[];
+}
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -45,9 +75,22 @@ export class ToolbarComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    
     this.carrello.getCarrello().subscribe(carrello => {
-      this.numero = carrello.length;
+      let total = 0;
+      for (let item of carrello) {
+        total += item['numero'];
+      }
+      this.numero = total;
     });
+    this.http.post<CarrelloResponse>('http://localhost:3000/api/carrello', {action: 'get'}, {withCredentials: true}).subscribe(
+      (response) => {
+        console.log(response);
+        response.carrello.forEach(item => {
+          this.carrello.setCarrello(item.oggetti, item.taglie.nome, item.numero);
+        });
+      }
+    );
     this.storageSub = this.localStorageService.watchStorage().subscribe(() => {
       this.updateUserFromLocalStorage();
     });
