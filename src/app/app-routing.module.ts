@@ -12,7 +12,7 @@ import { CarrelloComponent } from './components/carrello/carrello.component';
 const routes: Routes = [
   {path: '', component: RegistrazioneComponent},
   {path: 'login', component: StepperVerticalExample},
-  {path: 'home', component: CarrelloComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'person', component: PersonComponent},
   {path: 'oggetti', component: OggettiComponent},
   {path: 'oggetti/evidenziato/:id', component: OggettoEvidenziatoComponent},

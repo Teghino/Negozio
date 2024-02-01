@@ -28,7 +28,9 @@
 
   <div mat-button *ngIf="isLogged" class="user-info">
     <div class="cartContainer">
-      <mat-icon [matBadge]='getNumero()' matBadgeColor="warn" class="cart" routerLink="/carrello" >shopping_cart</mat-icon>
+      <button mat-icon-button [disabled]="getNumero() == 0" routerLink="/carrello">
+        <mat-icon [matBadge]='getNumero()' matBadgeColor="warn" class="cart">shopping_cart</mat-icon>
+      </button>
     </div>
     {{user.nameUser}} 
     <div class="imgcontenitore">

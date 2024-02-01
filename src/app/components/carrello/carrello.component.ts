@@ -21,4 +21,12 @@ export class CarrelloComponent implements OnInit{
   getCarrello() {
     return this.carrello;
   }
+
+  getTotale() {
+    let totale = 0;
+    for (let i = 0; i < this.carrello.length; i++) {
+      totale += this.carrello[i]['prezzo'] * this.carrello[i]['numero'];
+    }
+    return totale;
+  }
 }

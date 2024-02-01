@@ -5,10 +5,29 @@
                 <div class="contImg">
                     <img src="{{item['foto']}}" alt="" class="img"> 
                 </div>
+                <div class="contDesc">
+                    <div class="contD">
+                        <h1>{{item['nome']}}</h1>
+                        <p>{{item['descrizione']}}</p>
+                        <p>Taglia: {{item['taglia']}}</p>
+                        <h3 class="bold-text">Quantità: {{item['numero']}}</h3>
+                    </div>
+                    <div class="contPrezzo">
+                        <h2 class="bold-text">{{item['prezzo']}} $</h2>
+                    </div>
+                </div>
+                <div class="contAddDelete">
+                    
+                </div>
             </div>
         </div>
         <div class="totale">
-
+            <h1 class="bold-text">Totale</h1>
+            <h3>Subtotale: {{getTotale()}} $</h3>
+            <h3>Spedizione: 0 $</h3>
+            <hr>
+            <h2 class="bold-text">Totale: {{getTotale()}} $</h2>
+            <button mat-raised-button color="primary">Procedi</button>
         </div>
     </div>
     
