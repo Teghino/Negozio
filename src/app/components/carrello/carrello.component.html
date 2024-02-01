@@ -1,1 +1,15 @@
-<p>carrello works!</p>
+<body>
+    <div class="container">
+        <div class="contOggetto">
+            <div class="oggetto" *ngFor="let item of getCarrello()">
+                <div class="contImg">
+                    <img src="{{item['foto']}}" alt="" class="img"> 
+                </div>
+            </div>
+        </div>
+        <div class="totale">
+
+        </div>
+    </div>
+    
+</body>
