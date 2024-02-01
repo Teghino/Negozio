@@ -26,7 +26,7 @@ export class AppComponent {
       const utente = JSON.parse(utenteString);
       const user = new Users(utente.name, false);
       localStorage.setItem('utente', JSON.stringify(user));
-            this.http.post('http://localhost:3000/api/token',
+      this.http.post('http://localhost:3000/api/token',
         {},
         {withCredentials: true}
       ).pipe(
@@ -66,6 +66,7 @@ export class AppComponent {
       });
     }else{
       console.log('utente non loggato');
+      this.localStorageService.removeAll();
     }
   }
 }

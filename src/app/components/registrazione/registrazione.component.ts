@@ -17,7 +17,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Users } from 'src/app/userModel';
 import { LocalStorageService } from '../../servizi/localStorage.service';
 import { CookieService } from 'ngx-cookie-service';
-
+import { HttpService } from 'src/app/servizi/http.service';
 
 
 export function passwordValidator(): ValidatorFn {
@@ -65,7 +65,7 @@ export class RegistrazioneComponent {
 
 
 
-  constructor(private cookie: CookieService, private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private httpService: HttpService, private cookie: CookieService, private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -90,11 +90,8 @@ export class RegistrazioneComponent {
     let email = this.mainForm.value.secondFormGroup?.secondCtrl;
     let nome = this.mainForm.value.firstFormGroup?.firstCtrl;
     let password = this.mainForm.value.thirdFormGroup?.thirdCtrl;
-    this.http.post<ApiResponse>('http://localhost:3000/api/register',{
-     'nome' : nome,
-     'username' : email,
-     'password' : password,
-  }).pipe(
+    this.httpService.register(email, password, nome
+    ).pipe(
     catchError((error: any) => {
       console.error('Si è verificato un errore durante la registrazione:', error);
       if(error.status == 409){
@@ -120,8 +117,8 @@ export class RegistrazioneComponent {
   }
 
   onSubmitUser(){
-    this.http.get('http://localhost:3000/api/checkUser/' + this.mainForm.value.secondFormGroup?.secondCtrl
-    ).subscribe((response: any) => {
+    this.httpService.checkUser(this.mainForm.value.secondFormGroup?.secondCtrl)
+    .subscribe((response: any) => {
       if(response.exists){
         let secondFormGroup = this.mainForm.get('secondFormGroup');
         let secondCtrl = secondFormGroup ? secondFormGroup.get('secondCtrl') : null;

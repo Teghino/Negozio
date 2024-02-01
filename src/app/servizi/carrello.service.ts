@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrelloService {
-  constructor(private http: HttpClient) { }
+  constructor(private httpService: HttpService, private http: HttpClient) { }
   private carrelloSubject = new BehaviorSubject<{[key: string]: any}[]>([]);
 
   
@@ -22,8 +22,7 @@ export class CarrelloService {
   }
 
   addCarrello(carrello: {[key: string]: any}, taglia: string, numero: string) {
-    this.http.post('http://localhost:3000/api/carrello', {action: 'add', itemId: numero, taglia: taglia}, {withCredentials: true}
-    ).subscribe((response) => {
+    this.httpService.carrello('add', numero, taglia).subscribe((response) => {
         console.log(response);
       }
     );

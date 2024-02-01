@@ -20,4 +20,9 @@ export class LocalStorageService {
     localStorage.removeItem(key);
     this.storageSub.next('');
   }
+
+  removeAll(): void {
+    localStorage.clear();
+    this.storageSub.next('');
+  }
 }

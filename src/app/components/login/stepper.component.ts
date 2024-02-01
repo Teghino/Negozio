@@ -15,6 +15,7 @@ import { Users } from 'src/app/userModel';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../servizi/localStorage.service';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from 'src/app/servizi/http.service';
 
 /**
  * @title Stepper vertical
@@ -47,7 +48,7 @@ interface ApiResponse {
 export class StepperVerticalExample{
   @ViewChild('stepper') stepper?: MatStepper;
 
-  constructor(private cookie: CookieService, private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
+  constructor(private httpService: HttpService, private cookie: CookieService, private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private localStorageService: LocalStorageService) {}
 
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', [Validators.required, Validators.email]],
@@ -63,10 +64,10 @@ export class StepperVerticalExample{
   });
 
   onSubmit() {
-    this.http.post<ApiResponse>('http://localhost:3000/api/login',{
-     'username' : this.mainForm.value.secondFormGroup?.secondCtrl,
-     'password' : this.mainForm.value.thirdFormGroup?.thirdCtrl,
-  }).pipe(
+    this.httpService.login(
+      this.mainForm.value.secondFormGroup?.secondCtrl,
+      this.mainForm.value.thirdFormGroup?.thirdCtrl
+    ).pipe(
     catchError((error: any) => {
       console.error('Si è verificato un errore durante la registrazione:', error);
       return throwError(error);
