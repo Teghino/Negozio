@@ -19,6 +19,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { CarrelloService } from 'src/app/servizi/carrello.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpService } from 'src/app/servizi/http.service';
+import { ImmagineService } from 'src/app/servizi/immagine.service';
 interface RispostaApi {
   foto: string;
 }
@@ -68,7 +69,7 @@ export class ToolbarComponent implements OnInit, OnDestroy{
   public imageUrl: any;
   private numero: number = 0;
 
-  constructor(private httpService: HttpService, private cookie: CookieService, private carrello: CarrelloService, private http: HttpClient, private location: Location, private localStorageService: LocalStorageService, private sanitizer: DomSanitizer, private attributiOggettiService: AttributiOggettiService, private router: Router) {
+  constructor(private immagine: ImmagineService, private httpService: HttpService, private cookie: CookieService, private carrello: CarrelloService, private http: HttpClient, private location: Location, private localStorageService: LocalStorageService, private sanitizer: DomSanitizer, private attributiOggettiService: AttributiOggettiService, private router: Router) {
     const utente = JSON.parse(localStorage.getItem('utente') || '{}');
     this.user = new Users(utente.name, utente.isLogged);
     this.isLogged = this.user.getIsLoggedUser;
@@ -76,6 +77,9 @@ export class ToolbarComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.immagine.getImmagine().subscribe(immagine => {
+      this.imageUrl = immagine;
+    });
     this.carrello.getCarrello().subscribe(carrello => {
       let total = 0;
       for (let item of carrello) {
@@ -95,7 +99,7 @@ export class ToolbarComponent implements OnInit, OnDestroy{
       this.updateUserFromLocalStorage();
     });
     this.http.post<RispostaApi>('http://localhost:3000/api/user/image', {}, {withCredentials: true}).subscribe(data => {
-      this.imageUrl = data.foto;
+      this.immagine.setImmagine(data.foto);
       console.log(data)
     }, error => {
       console.log(error);

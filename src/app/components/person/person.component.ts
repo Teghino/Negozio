@@ -6,6 +6,12 @@ import { NgModule } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
+import { ImmagineService } from 'src/app/servizi/immagine.service';
+
+interface MioOggetto {
+  foto: string;
+  // altre proprietà...
+}
 
 @Component({
   selector: 'app-person',
@@ -20,10 +26,18 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule
   ],
 })
-export class PersonComponent {
 
 
-  constructor(private http: HttpClient) {}
+export class PersonComponent implements OnInit{
+  
+  private imm: string = '';
+  constructor(private immagine: ImmagineService, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.immagine.getImmagine().subscribe(immagine => {
+      this.imm = immagine;
+    });
+  }
 
 
   selectedItem: number | null = null;
@@ -59,8 +73,8 @@ export class PersonComponent {
       console.log(this.selectedFile);
       const formData = new FormData();
       formData.append('image', this.selectedFile, this.selectedFile.name);
-      this.http.post('http://localhost:3000/api/upload', formData, {withCredentials: true}).subscribe(response => {
-        console.log(response);
+      this.http.post<MioOggetto>('http://localhost:3000/api/upload', formData, {withCredentials: true}).subscribe(response => {
+        this.immagine.setImmagine(response.foto)
       }, error => {
         console.log(error);
       });
