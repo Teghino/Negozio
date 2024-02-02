@@ -20,7 +20,7 @@ import { CarrelloService } from 'src/app/servizi/carrello.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpService } from 'src/app/servizi/http.service';
 interface RispostaApi {
-  oggetti: [];
+  foto: string;
 }
 
 interface Oggetto {
@@ -94,11 +94,9 @@ export class ToolbarComponent implements OnInit, OnDestroy{
     this.storageSub = this.localStorageService.watchStorage().subscribe(() => {
       this.updateUserFromLocalStorage();
     });
-    this.http.post('http://localhost:3000/api/user/image', {}, {withCredentials: true, responseType: 'blob' }).subscribe(data => {
-      let blob = new Blob([data], { type: 'image/png' });
-      let url = window.URL.createObjectURL(blob);
-      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(url);
-      console.log(this.imageUrl)
+    this.http.post<RispostaApi>('http://localhost:3000/api/user/image', {}, {withCredentials: true}).subscribe(data => {
+      this.imageUrl = data.foto;
+      console.log(data)
     }, error => {
       console.log(error);
       this.imageUrl = null;
