@@ -58,7 +58,8 @@ mat-list-item{
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-
+  min-width: 80px;
+  min-height: 80px;
 }
 
 .imgprofilo{
