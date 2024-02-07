@@ -99,7 +99,11 @@ export class ToolbarComponent implements OnInit, OnDestroy{
       this.updateUserFromLocalStorage();
     });
     this.http.post<RispostaApi>('http://localhost:3000/api/user/image', {}, {withCredentials: true}).subscribe(data => {
-      this.immagine.setImmagine(data.foto);
+      if(data.foto != ""){
+        this.immagine.setImmagine(data.foto);
+      }else{
+        this.immagine.setImmagine("assets/img/noImmagine.jpg");
+      }
       console.log(data)
     }, error => {
       console.log(error);
