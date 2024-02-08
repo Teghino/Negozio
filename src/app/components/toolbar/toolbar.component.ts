@@ -98,7 +98,7 @@ export class ToolbarComponent implements OnInit, OnDestroy{
     this.storageSub = this.localStorageService.watchStorage().subscribe(() => {
       this.updateUserFromLocalStorage();
     });
-    this.http.post<RispostaApi>('http://localhost:3000/api/user/image', {}, {withCredentials: true}).subscribe(data => {
+    this.httpService.userImage().subscribe(data => {
       if(data.foto != ""){
         this.immagine.setImmagine(data.foto);
       }else{

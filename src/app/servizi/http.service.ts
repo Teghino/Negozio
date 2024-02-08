@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+interface RispostaApi {
+  foto: string;
+}
+
 interface ApiResponse {
   success: boolean;
   accessToken: string;
@@ -76,4 +80,14 @@ export class HttpService {
   setTaglieDisponibili(idOggetto: any){
     return this.http.get(`${this.url}/prodotto/${idOggetto}`, {withCredentials: true});
   }
+
+  userImage(){
+    return this.http.post<RispostaApi>(`${this.url}/user/image`, {}, {withCredentials: true});
+  }
+
+  uploadImage(FormData: any){
+    return this.http.post<RispostaApi>(`${this.url}/upload`, FormData, {withCredentials: true});
+  }
 }
+
+

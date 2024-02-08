@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import { ImmagineService } from 'src/app/servizi/immagine.service';
+import { HttpService } from 'src/app/servizi/http.service';
 
 interface MioOggetto {
   foto: string;
@@ -31,7 +32,7 @@ interface MioOggetto {
 export class PersonComponent implements OnInit{
   
   private imm: string = '';
-  constructor(private immagine: ImmagineService, private http: HttpClient) {}
+  constructor(private httpService: HttpService, private immagine: ImmagineService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.immagine.getImmagine().subscribe(immagine => {
@@ -73,7 +74,7 @@ export class PersonComponent implements OnInit{
       console.log(this.selectedFile);
       const formData = new FormData();
       formData.append('image', this.selectedFile, this.selectedFile.name);
-      this.http.post<MioOggetto>('http://localhost:3000/api/upload', formData, {withCredentials: true}).subscribe(response => {
+      this.httpService.uploadImage(formData).subscribe(response => {
         this.immagine.setImmagine(response.foto)
       }, error => {
         console.log(error);
