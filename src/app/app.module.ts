@@ -19,6 +19,7 @@ import { OggettoEvidenziatoComponent } from './components/oggetto-evidenziato/og
 import {MatButtonModule} from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { CarrelloComponent } from './components/carrello/carrello.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -43,7 +44,8 @@ import { CarrelloComponent } from './components/carrello/carrello.component';
         HttpClientModule,
         CommonModule,
         MatButtonModule,
-        MatRadioModule
-    ]
+        MatRadioModule,
+        MatIconModule,
+    ],
 })
 export class AppModule { }

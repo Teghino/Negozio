@@ -43,8 +43,30 @@ export class CarrelloService {
     console.log(tmp);
   }
 
+  removeCarrello(carrello: {[key: string]: any}, taglia: string, numero: string) {
+    this.httpService.carrello('remove', numero, taglia).subscribe((response) => {
+        console.log(response);
+      }
+    );
+    let carrelloCopia = {...carrello}; // Crea una copia dell'oggetto 'carrello'
+    carrelloCopia['taglia'] = taglia; // Aggiunge la proprietà 'taglia' alla copia
+    let tmp = this.carrelloSubject.getValue();
+    let foundItem = tmp.find(item => item['id'] === carrelloCopia['id'] && item['taglia'] === taglia);
+    if (foundItem) {
+      // Se l'elemento esiste già, incrementa solo il suo numero
+      // Se l'elemento esiste già, incrementa solo il suo numero
+      foundItem['numero'] -= 1;
+    } else {
+      console.log('elemento non presente');
+    } // Aggiunge la copia all'array
+    this.carrelloSubject.next(tmp);
+    console.log(tmp);
+  }
+
   getCarrello(): Observable<{[key: string]: any}[]> {
     return this.carrelloSubject.asObservable();
   }
+
+
 
 }

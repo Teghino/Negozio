@@ -105,3 +105,27 @@ hr{
     flex-direction: column;
     justify-content: center;
 }
+
+.numero{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+
+}
+
+#num{
+    display: flex;
+    align-items: center; /* Allinea verticalmente al centro */
+    justify-content: center; /* Allinea orizzontalmente al centro */
+    margin-bottom: 0;
+}
+
+.center{
+    margin-bottom: 1px;
+}
+
+#dest{
+    margin-left: 20px;
+}
+

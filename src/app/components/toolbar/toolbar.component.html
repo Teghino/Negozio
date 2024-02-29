@@ -15,9 +15,9 @@
     <button mat-raised-button [matMenuTriggerFor]="menuDonna" class="item" color="primary"> Donna </button>
     <mat-menu #menuDonna="matMenu" class="my-menu">
       <!-- Elementi del menu -->
-      <button mat-menu-item routerLink="/oggetti"> felpe </button>
-      <button mat-menu-item routerLink="/oggetti"> magliette </button>
-      <button mat-menu-item routerLink="/oggetti"> pantaloni </button>
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('felpa', 'd')"> felpe </button>
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('maglietta', 'd')" > magliette </button>
+      <button mat-menu-item routerLink="/oggetti" (click)="setCs('pantalone', 'd')"> pantaloni </button>
     </mat-menu>
   </span>
   <span class="example-spacer"></span>

@@ -10,7 +10,16 @@
                         <h1>{{item['nome']}}</h1>
                         <p>{{item['descrizione']}}</p>
                         <p>Taglia: {{item['taglia']}}</p>
-                        <h3 class="bold-text">Quantità: {{item['numero']}}</h3>
+                        <div class="numero">
+                            <h3 id="num" class="bold-text">Quantità: {{item['numero']}}</h3>
+                            <button mat-icon-button class="center" id="dest" (click)="removeCart(item)">
+                                <mat-icon>exposure_neg_1</mat-icon>
+                            </button>
+                            <button mat-icon-button class="center" (click)="addCart(item)">
+                                <mat-icon>exposure_plus_1</mat-icon>
+                            </button>
+                        </div>
+                        
                     </div>
                     <div class="contPrezzo">
                         <h2 class="bold-text">{{item['prezzo'] * item['numero']}} $</h2>

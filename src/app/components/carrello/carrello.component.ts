@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrelloService } from 'src/app/servizi/carrello.service';
 import { NgModule } from '@angular/core';
+import { HttpService } from 'src/app/servizi/http.service';
+
 
 @Component({
   selector: 'app-carrello',
@@ -10,7 +12,9 @@ import { NgModule } from '@angular/core';
 export class CarrelloComponent implements OnInit{
   private carrello: {[key: string]: any}[] = [];
 
-  constructor(private carrelloService: CarrelloService) { }
+  constructor(private httpService: HttpService, private carrelloService: CarrelloService) { }
+
+  
   ngOnInit(): void {
     this.carrelloService.getCarrello().subscribe((carrello) => {
       console.log(carrello);
@@ -29,4 +33,14 @@ export class CarrelloComponent implements OnInit{
     }
     return totale;
   }
+
+  addCart(oggetto: any) {
+    console.log('aggiunto al carrello'+ ' ' + oggetto);
+    this.carrelloService.addCarrello(oggetto, oggetto.taglia, oggetto.id);
+  }
+
+  removeCart(oggetto: any){
+    this.carrelloService.removeCarrello(oggetto, oggetto.taglia, oggetto.id);
+  }
+  
 }
